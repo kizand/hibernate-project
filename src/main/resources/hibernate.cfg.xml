@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Настройки подключения (перенаправляем через P6Spy) -->
+        <property name="hibernate.connection.driver_class">com.p6spy.engine.spy.P6SpyDriver</property>
+        <property name="hibernate.connection.url">jdbc:p6spy:mysql://localhost:3306/world</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property>
+
+        <!-- Диалект для MySQL 9.x / 8.x -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Говорит Hibernate привязывать сессию к текущему потоку выполнения -->
+        <property name="hibernate.current_session_context_class">thread</property>
+
+        <!-- Отключаем встроенное логирование Hibernate, чтобы логи не дублировались -->
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.format_sql">false</property>
+
+        <mapping class="com.javarush.domain.City"/>
+        <mapping class="com.javarush.domain.Country"/>
+        <mapping class="com.javarush.domain.CountryLanguage"/>
+
+
+    </session-factory>
+</hibernate-configuration>
