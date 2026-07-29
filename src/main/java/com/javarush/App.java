@@ -20,7 +20,7 @@ public class App {
             List<Integer> ids = List.of(3, 30, 300, 5, 50, 500, 7, 70, 700, 900);
             appService.migrateDataAndRunBenchmark(ids, 30);
         } catch (Exception e) {
-            log.error("Произошла ошибка в процессе выполнения приложения!", e);
+            log.error("Произошла ошибка в процессе выполнения приложения.", e);
         }
     }
 }
