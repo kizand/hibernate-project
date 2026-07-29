@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Настройки подключения через P6Spy -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/world</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property>
+
+        <!-- Диалект для MySQL 9.x / 8.x -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.format_sql">false</property>
+
+        <!-- Добавляем эту строку для тестов -->
+        <!-- validate гарантирует, что Hibernate проверит схемы, но ничего не удалит -->
+        <property name="hibernate.hbm2ddl.auto">validate</property>
+
+        <mapping class="com.javarush.domain.City"/>
+        <mapping class="com.javarush.domain.Country"/>
+        <mapping class="com.javarush.domain.CountryLanguage"/>
+
+
+    </session-factory>
+</hibernate-configuration>

@@ -7,14 +7,17 @@ import org.hibernate.cfg.Configuration;
 @Slf4j
 public class HibernateUtil {
 
-    // Единственный экземпляр фабрики сессий на всё приложение
     private static final SessionFactory sessionFactory = buildSessionFactory();
 
     private static SessionFactory buildSessionFactory() {
         try {
+            ch.qos.logback.classic.LoggerContext loggerContext =
+                    (ch.qos.logback.classic.LoggerContext) org.slf4j.LoggerFactory.getILoggerFactory();
+            java.util.List.of("org.hibernate", "io.lettuce", "io.netty")
+                    .forEach(loggerName -> loggerContext.getLogger(loggerName).setLevel(ch.qos.logback.classic.Level.WARN));
+
             log.info("Инициализация Hibernate и чтение конфигурации...");
 
-            // configure() автоматически ищет файл hibernate.cfg.xml в папке resources
             return new Configuration().configure().buildSessionFactory();
 
         } catch (Throwable ex) {
@@ -23,12 +26,10 @@ public class HibernateUtil {
         }
     }
 
-    // Метод, через который вы будете получать доступ к базе данных
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
-    // Метод для корректного закрытия соединений при выходе из приложения
     public static void shutdown() {
         if (sessionFactory != null && !sessionFactory.isClosed()) {
             log.info("Закрытие фабрики сессий Hibernate...");

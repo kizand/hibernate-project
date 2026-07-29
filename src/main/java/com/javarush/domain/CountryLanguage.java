@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.type.NumericBooleanConverter;
 
-import javax.annotation.processing.Generated;
 import java.math.BigDecimal;
 
 @Entity
